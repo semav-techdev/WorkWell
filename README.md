@@ -1,4 +1,4 @@
-# Motion AI Learning
+#WorkWell
 
 A lightweight computer vision project for real-time motion and posture detection using **MediaPipe**.
 
