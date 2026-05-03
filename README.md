@@ -81,7 +81,7 @@ Instead of training a model, this project uses **pre-trained MediaPipe models** 
 
 ## 👩‍💻 Author
 
-Built by Simav Adnan Mohamed & Liloz Shible
+Built by Simav Adnan Mohamed & Liloz khorshed shlbe
 
 ---
 
