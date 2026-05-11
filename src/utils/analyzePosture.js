@@ -39,7 +39,7 @@ export function analyzePosture({
     startRef: neckStart,
     notifiedRef: notifiedNeck,
     now,
-    message: "⚠️ Neck bending",
+    message: "⚠️ انحناء في الرقبة",
     soundType: "danger",
     setAlerts,
   });
@@ -55,7 +55,7 @@ export function analyzePosture({
     startRef: shoulderStart,
     notifiedRef: notifiedShoulder,
     now,
-    message: "⚠️ Incorrect shoulder posture",
+    message: "⚠️ وضعية كتفين خاطئة",
     soundType: "normal",
     setAlerts,
   });
@@ -68,14 +68,14 @@ export function analyzePosture({
     startRef: torsoStart,
     notifiedRef: notifiedTorso,
     now,
-    message: "⚠️ Torso bending",
+    message: "⚠️ انحناء في الجذع",
     soundType: "danger",
     setAlerts,
   });
 
   setFeedback({
-    neckTilt: neckIssue ? "Bent" : "Normal",
-    shoulders: shoulderIssue ? "Bent" : "Normal",
-    torsoTilt: torsoIssue ? "Bent" : "Normal",
+    neckTilt: neckIssue ? "منحني" : "معتدل",
+    shoulders: shoulderIssue ? "منحني" : "معتدل",
+    torsoTilt: torsoIssue ? "منحني" : "معتدل",
   });
 }

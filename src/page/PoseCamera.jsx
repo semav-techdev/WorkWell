@@ -5,8 +5,6 @@ import { analyzePosture } from "../utils/analyzePosture";
 function PoseCamera() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  // استخدمت ref 
-  // لتتبع الوقت بدون اعادة render
   const refs = {
     neckStart: useRef(null),
     shoulderStart: useRef(null),
@@ -19,20 +17,19 @@ function PoseCamera() {
   const [alerts, setAlerts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [feedback, setFeedback] = useState({
-    neckTilt: "Normal",
-    shoulders: "Normal",
-    torsoTilt: "Normal",
+    neckTilt: "Good",
+    shoulders: "Good",
+    torsoTilt: "Good",
   });
-  const getStatusColor = (value) => {
-    if (value === 'Normal') return "text-green-400";
-    if (value === 'Bent') return "text-red-400";
-    return "text-gray-300";
+  const getStatusColor=(value)=>{
+    if (value == 'Good') return "text-green-400";
+    if (value == 'Bad') return "text-red-400";
   }
+
   usePoseDetection(videoRef, canvasRef, (landmarks) => {
     if (landmarks && isLoading) {
       setIsLoading(false);
     }
-    //نرسل البيانات للتحليل 
     analyzePosture({
       landmarks,
       refs,
@@ -49,7 +46,7 @@ function PoseCamera() {
           Motion AI Learning 🧠
         </h1>
         <p className="text-center text-xl lg:text-2xl text-gray-400 mb-8">
-          Smart learning support platform - posture correction
+          Smart Learning Support Platform - Posture Correction
         </p>
         {isLoading && (
             <div className="mt-4 inline-flex items-center gap-2 bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
