@@ -55,7 +55,7 @@ export function analyzePosture({
     startRef: shoulderStart,
     notifiedRef: notifiedShoulder,
     now,
-    message: "⚠️ Incorrect shoulder posture",
+    message: "⚠️Incorrect shoulder posture",
     soundType: "normal",
     setAlerts,
   });

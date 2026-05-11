@@ -71,8 +71,7 @@ function PoseCamera() {
             <div className=" bg-gray-800 p-4 rounded-xl  text-white">
               <h2 className="text-[30px] mb-4">📊 Analysis</h2>
               <p className="text-[20px] text-gray-300 ">
-                      Neck: <span className={getStatusColor(feedback.neckTilt)}>{feedback.neckTilt}</span>
-              </p>
+                      Neck: <span className={getStatusColor(feedback.neckTilt)}>{feedback.neckTilt}</span></p>
               <p className="text-[20px] text-gray-300 ">Shoulders: <span className={getStatusColor(feedback.shoulders)}>
                           {feedback.shoulders}</span>
               </p>
