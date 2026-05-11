@@ -1,5 +1,5 @@
 import {playBeep,pushAlert} from "../utils/alretUtils"
-// بيعطي التنبيه بعد مدة زمنية مدتها 2 ثانية
+// Gives alert after 2 seconds
 export function handlePostureIssue({
   condition,
   startRef,
@@ -13,7 +13,7 @@ export function handlePostureIssue({
     if (startRef.current === null) startRef.current = now;
 
     const elapsed = (now - startRef.current) / 1000;
-// اذا استمر التنبيه 2 ثانية يعطي صوت
+// If alert persists for 2 seconds, play sound
     if (elapsed >= 2 && !notifiedRef.current) {
       playBeep(soundType);
       pushAlert(setAlerts, message);

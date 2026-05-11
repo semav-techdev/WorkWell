@@ -1,6 +1,6 @@
 import { calculateAngle } from "./postureUtils";
 import { handlePostureIssue } from "./helperArlet";
-// لتحليل وضعية الجسم 
+// Analyze body posture
 export function analyzePosture({
   landmarks,
   refs,
@@ -10,14 +10,14 @@ export function analyzePosture({
   const now = Date.now();
 
   const { neckStart, shoulderStart, torsoStart, notifiedNeck, notifiedShoulder, notifiedTorso } = refs;
-// جلب نقاط الجسم المهمة
+// Get important body points
   const leftEar = landmarks[7];
   const rightEar = landmarks[8];
   const leftShoulder = landmarks[11];
   const rightShoulder = landmarks[12];
   const leftHip = landmarks[23];
   const rightHip = landmarks[24];
-// حساب المتوسط لبعض النقاط لنأخذها كمرجع
+// Calculate average for some points to use as reference
   const avgEar = {
     x: (leftEar.x + rightEar.x) / 2,
     y: (leftEar.y + rightEar.y) / 2,
@@ -27,7 +27,7 @@ export function analyzePosture({
     x: (leftShoulder.x + rightShoulder.x) / 2,
     y: (leftShoulder.y + rightShoulder.y) / 2,
   };
-// حساب زاوية الرقبة
+// Calculate neck angle
   const neckAngle = calculateAngle(
     avgEar,
     avgShoulder,
@@ -39,7 +39,7 @@ export function analyzePosture({
     startRef: neckStart,
     notifiedRef: notifiedNeck,
     now,
-    message: "⚠️ انحناء في الرقبة",
+    message: "⚠️ Neck bending detected",
     soundType: "danger",
     setAlerts,
   });
@@ -55,7 +55,7 @@ export function analyzePosture({
     startRef: shoulderStart,
     notifiedRef: notifiedShoulder,
     now,
-    message: "⚠️ وضعية كتفين خاطئة",
+    message: "⚠️ Incorrect shoulder posture",
     soundType: "normal",
     setAlerts,
   });
@@ -68,14 +68,14 @@ export function analyzePosture({
     startRef: torsoStart,
     notifiedRef: notifiedTorso,
     now,
-    message: "⚠️ انحناء في الجذع",
+    message: "⚠️ Torso bending detected",
     soundType: "danger",
     setAlerts,
   });
 
   setFeedback({
-    neckTilt: neckIssue ? "منحني" : "معتدل",
-    shoulders: shoulderIssue ? "منحني" : "معتدل",
-    torsoTilt: torsoIssue ? "منحني" : "معتدل",
+    neckTilt: neckIssue ? "Bad" : "Good",
+    shoulders: shoulderIssue ? "Bad" : "Good",
+    torsoTilt: torsoIssue ? "Bad" : "Good",
   });
 }

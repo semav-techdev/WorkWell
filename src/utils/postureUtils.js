@@ -1,4 +1,4 @@
-// لحساب الزوايا 
+// Calculate angles
 export function calculateAngle(A, B, C) {
       const radians =
         Math.atan2(C.y - B.y, C.x - B.x) -

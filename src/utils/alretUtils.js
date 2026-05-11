@@ -1,4 +1,4 @@
-//بتشغل صوت تنبيه 
+// Plays alert sound
 export  function playBeep(type = "normal") {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
@@ -15,7 +15,7 @@ export  function playBeep(type = "normal") {
 
       oscillator.stop(audioCtx.currentTime + 0.2);
     }
-  // بيعطي رسالة تنبيه   
+  // Gives alert message
 export function pushAlert(setAlerts,message, type = "warning") {
       setAlerts((prev) => [
         { message, type, time: Date.now() },
