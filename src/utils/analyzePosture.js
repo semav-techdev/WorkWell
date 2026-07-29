@@ -1,23 +1,31 @@
 import { calculateAngle } from "./postureUtils";
 import { handlePostureIssue } from "./helperArlet";
-// لتحليل وضعية الجسم 
+
 export function analyzePosture({
   landmarks,
   refs,
   setAlerts,
-  setFeedback
+  setFeedback,
+  soundVolume = 70,
 }) {
   const now = Date.now();
 
-  const { neckStart, shoulderStart, torsoStart, notifiedNeck, notifiedShoulder, notifiedTorso } = refs;
-// جلب نقاط الجسم المهمة
+  const {
+    neckStart,
+    shoulderStart,
+    torsoStart,
+    notifiedNeck,
+    notifiedShoulder,
+    notifiedTorso,
+  } = refs;
+
   const leftEar = landmarks[7];
   const rightEar = landmarks[8];
   const leftShoulder = landmarks[11];
   const rightShoulder = landmarks[12];
   const leftHip = landmarks[23];
   const rightHip = landmarks[24];
-// حساب المتوسط لبعض النقاط لنأخذها كمرجع
+
   const avgEar = {
     x: (leftEar.x + rightEar.x) / 2,
     y: (leftEar.y + rightEar.y) / 2,
@@ -27,21 +35,21 @@ export function analyzePosture({
     x: (leftShoulder.x + rightShoulder.x) / 2,
     y: (leftShoulder.y + rightShoulder.y) / 2,
   };
-// حساب زاوية الرقبة
-  const neckAngle = calculateAngle(
-    avgEar,
-    avgShoulder,
-    { x: avgShoulder.x + 0.1, y: avgShoulder.y }
-  );
+
+  const neckAngle = calculateAngle(avgEar, avgShoulder, {
+    x: avgShoulder.x + 0.1,
+    y: avgShoulder.y,
+  });
 
   const neckIssue = handlePostureIssue({
     condition: neckAngle < 85 || neckAngle > 95,
     startRef: neckStart,
     notifiedRef: notifiedNeck,
     now,
-    message: "⚠️ انحناء في الرقبة",
+    message: "neckAlert",
     soundType: "danger",
     setAlerts,
+    soundVolume,
   });
 
   const leftAngle = calculateAngle(leftEar, leftShoulder, leftHip);
@@ -55,11 +63,11 @@ export function analyzePosture({
     startRef: shoulderStart,
     notifiedRef: notifiedShoulder,
     now,
-    message: "⚠️ وضعية كتفين خاطئة",
+    message: "shoulderAlert",
     soundType: "normal",
     setAlerts,
+    soundVolume,
   });
-
 
   const torsoValue = Math.abs(leftShoulder.x - rightShoulder.x) * 100;
 
@@ -68,14 +76,15 @@ export function analyzePosture({
     startRef: torsoStart,
     notifiedRef: notifiedTorso,
     now,
-    message: "⚠️ انحناء في الجذع",
+    message: "torsoAlert",
     soundType: "danger",
     setAlerts,
+    soundVolume,
   });
 
   setFeedback({
-    neckTilt: neckIssue ? "منحني" : "معتدل",
-    shoulders: shoulderIssue ? "منحني" : "معتدل",
-    torsoTilt: torsoIssue ? "منحني" : "معتدل",
+    neckTilt: neckIssue ? "bad" : "good",
+    shoulders: shoulderIssue ? "bad" : "good",
+    torsoTilt: torsoIssue ? "bad" : "good",
   });
 }

@@ -1,2 +1,10 @@
-# WorkWell
-WorkWell – A web-based posture detection app using computer vision to monitor sitting position and give real-time corrections for healthier desk habits.
+### run the project
+
+## first :
+
+npm install
+
+## second :
+
+npm run dev
+then go to the link
